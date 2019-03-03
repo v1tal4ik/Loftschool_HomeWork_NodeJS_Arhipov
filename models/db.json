@@ -30,11 +30,6 @@
       "src": "./assets/img/products/Work6.jpg",
       "price": 50,
       "name": "Чашка"
-    },
-    {
-      "src": "./upload/sample-pano-object.jpg",
-      "price": "156",
-      "name": "Watch"
     }
   ],
   "skills": [

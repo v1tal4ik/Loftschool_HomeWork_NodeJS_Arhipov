@@ -62,6 +62,7 @@ module.exports.admin = async(req,res, next)=>{
         msgskill: req.flash('skill')[0],
         msgfile: req.flash('file')[0]
     }
+    if (!req.session.auth){res.redirect('/login')};
     res.render('pages/admin',data);
 };
 
@@ -107,7 +108,7 @@ module.exports.adminUpload = async(req,res, next)=>{
 
         const {name,price} = fields;
         const result = validate(fields,files);
-        if(!result){
+        if(!result ){
             req.flash('file','Виникла помилка :(');
             res.redirect('/admin');
         }else{
