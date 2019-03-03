@@ -1,0 +1,24 @@
+extends ../_template
+
+
+block variables
+  - var title = 'Error page'
+
+block content
+  header.header
+    .container.header__container
+      .header__top
+        a(href="/").title-name Архипов
+          span.title-name__doter .
+        .header__social
+          ul.social
+            each item in social
+              li.social__item
+                a.social__link(href="http://")
+                  i(class=`fab ${item}`)
+          
+      h1.form-login__label Error
+        p.form-login__label= status
+        p.title-name=error
+        a.form-login__label(href='/') На головну 
+                   
