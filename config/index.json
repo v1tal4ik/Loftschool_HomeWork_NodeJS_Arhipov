@@ -1,26 +1,23 @@
-{
-    "session": {
-        "secret": "v1tal4iik",
-        "key": "sessionkey",
-        "cookie": {
-            "path": "/",
-            "httpOnly": true,
-            "maxAge": 60000
-        },
-        "saveUninitialized": false,
-        "resave": false
-    },
-    "upload":"./public/upload",
-    "mail": {
-        "subject": "Повідомлення з сайту Архіпов",
-        "smtp":{
-            "host": "smtp.gmail.com",
-            "port":465,
-            "secure": true,
-            "auth":{
-                "user":"sendermessagers@gmail.com",
-                "pass":"vetal155811"
-            }
+"session": {
+    "key": "koa:sess",
+    "maxAge": 60000,
+    "overwrite": true,
+    "httpOnly": true,
+    "signed": false,
+    "rolling": false,
+    "renew": false
+  },
+"upload":"./public/upload",
+"mail": {
+    "subject": "Повідомлення з сайту Архіпов",
+    "smtp":{
+        "host": "smtp.gmail.com",
+        "port":465,
+        "secure": true,
+        "auth":{
+            "user":"sendermessagers@gmail.com",
+            "pass":"vetal155811"
         }
     }
+}
 }
