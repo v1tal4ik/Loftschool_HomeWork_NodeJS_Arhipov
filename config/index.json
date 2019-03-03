@@ -1,4 +1,5 @@
-"session": {
+{
+    "session": {
     "key": "koa:sess",
     "maxAge": 60000,
     "overwrite": true,

@@ -53,7 +53,7 @@ module.exports.login = async(ctx, next)=>{
     const data = {
         msgslogin: ""
     }
-    if(ctx.session.auth){ctx.redirect('/admin')};
+    //if(ctx.session.auth){ctx.redirect('/admin')};
     ctx.render('pages/login',data);
 };
 //flash
@@ -74,9 +74,9 @@ module.exports.auth = async(ctx, next)=>{
         res.redirect('/login');
     }
     if(user.email === email && psw.validPassword(password)){
-        console.log('before :',ctx.session.auth);
-        ctx.session.auth= true;
-        console.log('after :',ctx.session.auth);
+        //console.log('before :',ctx.session.auth);
+        //ctx.session.auth= true;
+        //console.log('after :',ctx.session.auth);
         ctx.redirect('/admin');
     }else{
         //req.flash('auth','Невірний логін або пароль');

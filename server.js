@@ -1,14 +1,44 @@
-const express = require('express');
+const Koa = require('koa');
+const app = new Koa();
+const fs = require('fs');
+const path = require('path');
+const static = require('koa-static');
+const session = require('koa-session');
+const Pug = require('koa-pug');
+const pug = new Pug({
+    viewPath: './source/template',
+    pretty: false,
+    basedir: './source/template',
+    noCache: true,
+    app: app
+});
+const config = require('./config');
+const port = process.env.PORT || 3000;
+
+app.use(static('./public'));
+
+const router = require('./routes');
+app.use(router.routes()).use(router.allowedMethods());
+
+
+
+app.listen(port,()=>{
+    if(!fs.existsSync(config.upload)){
+        fs.mkdirSync(config.upload);
+    }
+console.log('Server start in port: ',port);
+});
+
+/*
+
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const config = require('./config');
-const port = process.env.PORT || 3000;
 
-const app = express()
+
 
 
 
@@ -44,3 +74,4 @@ app.listen(port,()=>{
     }
 console.log('Server start in port: ',port);
 });
+*/
