@@ -10,7 +10,7 @@ router.get('/login',controllers.login);
 router.post('/login',koaBody(),controllers.auth);
 router.get('/admin',controllers.admin);
 router.post('/admin/skills',koaBody(),controllers.adminSkills);
-router.post('/admin/upload',controllers.adminUpload);
+router.post('/admin/upload',koaBody(),controllers.adminUpload);
 
 
 

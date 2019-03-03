@@ -12,13 +12,17 @@ const pug = new Pug({
     noCache: true,
     app: app
 });
+const flash = require('koa-better-flash');
+const router = require('./routes');
 const config = require('./config');
 const port = process.env.PORT || 3000;
 
 app.use(static('./public'));
-
-const router = require('./routes');
-app.use(router.routes()).use(router.allowedMethods());
+app.keys = ['keys'];
+app.use(session(config.session, app))
+    .use(flash())
+    .use(router.routes())
+    .use(router.allowedMethods());
 
 
 

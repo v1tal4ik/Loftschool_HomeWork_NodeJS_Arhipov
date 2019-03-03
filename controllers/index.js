@@ -15,12 +15,12 @@ module.exports.index = async(ctx, next)=>{
     const data = {
         items_products:products,
         items_skills:skills,
-        msgsemail:'message'
+        msgsemail:ctx.flash('form')[0]
     }
     ctx.render('pages/index.pug',data);
 };
 
-// flash , redirect(#status)
+// true redirect
 module.exports.indexMessage = async(ctx, next)=>{
     const {name,email,message} = ctx.request.body;
     const transporter = nodemailer.createTransport(config.mail.smtp);
@@ -33,89 +33,84 @@ module.exports.indexMessage = async(ctx, next)=>{
     if(name&& email && message){
         transporter.sendMail(mailOptions,(error,info)=>{
             if(error){
-                //req.flash('info','На жаль виникла помилка :(');
-                return ctx.redirect('/');
+                ctx.flash('form','На жаль виникла помилка :(');
+                return ctx.redirect('/#status');
             }
-
-
-            //req.flash('info','Повідомлення успішно відправлено');
-                console.log('Повідомлення успішно відправлено');
-                return ctx.redirect('/');
+                ctx.flash('form','Повідомлення успішно відправлено');
+                return ctx.redirect('/#status');
         });
     }else{
-        //req.flash('info','Заповніть усі поля ');
-                return ctx.redirect('/');
+          ctx.flash('form','Заповніть усі поля ');
+                return ctx.redirect('/#status');
     }
 };
 
-//flash,session
+
 module.exports.login = async(ctx, next)=>{
     const data = {
-        msgslogin: ""
+        msgslogin: ctx.flash('login')[0]
     }
-    //if(ctx.session.auth){ctx.redirect('/admin')};
+    if(ctx.session.auth){ctx.redirect('/admin')};
     ctx.render('pages/login',data);
 };
 //flash
 module.exports.admin = async(ctx, next)=>{
     const data = {
-        msgskill: '',
-        msgfile: ''
+        msgskill: ctx.flash('skill')[0],
+        msgfile: ctx.flash('file'[0])
     }
+    if(!ctx.session.auth){ctx.redirect('/login')}
     ctx.render('pages/admin',data);
 };
-//flash,session
+
 module.exports.auth = async(ctx, next)=>{
-    console.log('work');
    const {email,password} = ctx.request.body;
     const user = db.getState().user;
     if(!email && !password){
-        //req.flash('auth','Заповніть усі поля');
-        res.redirect('/login');
+        ctx.flash('login','Заповніть усі поля');
+        ctx.redirect('/login');
     }
     if(user.email === email && psw.validPassword(password)){
-        //console.log('before :',ctx.session.auth);
-        //ctx.session.auth= true;
-        //console.log('after :',ctx.session.auth);
+        ctx.session.auth= true;
         ctx.redirect('/admin');
     }else{
-        //req.flash('auth','Невірний логін або пароль');
+        ctx.flash('login','Невірний логін або пароль');
         ctx.redirect('/login');
     }
 };
-//flash
+
 module.exports.adminSkills = async(ctx, next)=>{
     const {age,concerts,cities,years} = ctx.request.body;
     const skills = db.getState().skills;
+    if(!ctx.session.auth){ctx.redirect('/login')};
     if(age && concerts && cities && years){
         db.set('skills[0].number',age).write();
         db.set('skills[1].number',concerts).write();
         db.set('skills[2].number',cities).write();
         db.set('skills[3].number',years).write();
-        //req.flash('skill','Зміни збережено');
-        console.log('Зміни збережено')
+        ctx.flash('skill','Зміни збережено');
         ctx.redirect('/admin');
     }else{
-        //req.flash('skill','Заповніть усі поля');
+        ctx.flash('skill','Заповніть усі поля');
         console.log("Заопвніть усі поля");
         ctx.redirect('/admin');
     }
 };
+
 //bodyParser,flash,
 module.exports.adminUpload = async(ctx, next)=>{
     const {name,price} = ctx.request.body;
-    console.log(ctx.request);
-    /*const form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm();
 
     form.uploadDir = path.join(process.cwd(),config.upload);
 
-    form.parse(req,(err,fields,files)=>{
+    form.parse(ctx.request,(err,fields,files)=>{
         if(err){console.log(err)};
 
         const {name,price} = fields;
         const result = validate(fields,files);
         if(!result){
-            //req.flash('file','Виникла помилка :(');
+            ctx.flash('file','Виникла помилка :(');
             ctx.redirect('/admin');
         }else{
             old_path = files.photo.path;
@@ -127,11 +122,30 @@ module.exports.adminUpload = async(ctx, next)=>{
                 name: name
             }
             db.get('product').push(obj).write();
-            //req.flash('file','Товар успішно завантажено');
+            ctx.flash('file','Товар успішно завантажено');
             ctx.redirect('/admin');
         }
-    });*/
+    });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
