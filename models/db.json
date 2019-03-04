@@ -27,11 +27,6 @@
       "name": "Одежда"
     },
     {
-      "src": "./assets/img/products/Work6.jpg",
-      "price": 50,
-      "name": "Чашка"
-    },
-    {
       "src": "./upload/sample-pano-object.jpg",
       "price": "156",
       "name": "Watch"
@@ -40,7 +35,7 @@
   "skills": [
     {
       "name": "age",
-      "number": "2",
+      "number": "1",
       "text": "Возраст начала занятий на скрипке"
     },
     {
@@ -50,7 +45,7 @@
     },
     {
       "name": "cities",
-      "number": "2",
+      "number": "1",
       "text": "Максимальное число городов в туре"
     },
     {

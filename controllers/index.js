@@ -3,7 +3,6 @@ const psw = require('../libs/password');
 const config = require('../config');
 const path = require('path');
 const fs = require('fs');
-const formidable = require('koa-formidable');
 const validate = require('../libs/validate');
 const sendMail = require('../libs/sendMail');
 
@@ -46,11 +45,11 @@ module.exports.login = async(ctx, next)=>{
     if(ctx.session.auth){ctx.redirect('/admin')};
     ctx.render('pages/login',data);
 };
-//flash
+
 module.exports.admin = async(ctx, next)=>{
     const data = {
         msgskill: ctx.flash('skill')[0],
-        msgfile: ''
+        msgfile: ctx.flash('file')[0]
     }
     if(!ctx.session.auth){ctx.redirect('/login')}
     ctx.render('pages/admin',data);
@@ -85,17 +84,32 @@ module.exports.adminSkills = async(ctx, next)=>{
         ctx.redirect('/admin');
     }else{
         ctx.flash('skill','Заповніть усі поля');
-        console.log("Заопвніть усі поля");
         ctx.redirect('/admin');
     }
 };
 
-//bodyParser,flash,
 module.exports.adminUpload = async(ctx, next)=>{
     const {photo,name,price} = ctx.request.body;
-    const file = ctx.request.files;
-    console.log('ctx.request.body',ctx.request.body);
-    console.log('ctx.request.files',ctx.request.files);
+    const {files} = ctx.request;
+  
+    const result = validate(ctx.request.body,files);
+    if(!result){
+        ctx.flash('file','Виникла помилка :(');
+        ctx.redirect('/admin');
+    }else{
+        old_path = files.photo.path;
+        new_path = path.join(process.cwd(),config.upload,files.photo.name);
+        fs.renameSync(old_path,new_path);
+        let obj = {
+            src: `./upload/${files.photo.name}`,
+            price: price,
+            name: name
+        }
+        db.get('product').push(obj).write();
+        ctx.flash('file','Товар успішно завантажено');
+        ctx.redirect('/admin');
+    }
+
 };
 
 
