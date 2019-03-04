@@ -44,6 +44,7 @@
     "koa-better-flash": "0.0.3",
     "koa-body": "^4.0.8",
     "koa-connect-flash": "^0.1.2",
+    "koa-formidable": "^1.1.0",
     "koa-pug": "^3.0.0-2",
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.1",

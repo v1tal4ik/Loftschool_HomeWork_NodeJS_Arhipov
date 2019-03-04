@@ -37,7 +37,7 @@ block content
             .form-upload__input-line
               .form-upload__wraper
                 label.form-upload__label
-                  input(name="photo" type="file"  required accept="image/*").form-upload__input-file
+                  input(name="photo" type="file"  required enctype="multipart/form-data" accept="image/*").form-upload__input-file
                   span.form-upload__input-file-title Загрузить фото
             .form-upload__input-line
               input(name="name" type="text" required placeholder="Название").form-upload__input
