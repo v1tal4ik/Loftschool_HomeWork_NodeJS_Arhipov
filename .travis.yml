@@ -8,5 +8,6 @@ deploy:
   api_key:
     secure: $he
   strategy: git
-  app:
-    03: archipov   
+  app: archipov
+  on:
+    branch: 03    
