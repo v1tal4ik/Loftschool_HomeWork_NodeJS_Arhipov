@@ -35,27 +35,27 @@
   "skills": [
     {
       "name": "age",
-      "number": "20",
+      "number": "1",
       "text": "Возраст начала занятий на скрипке"
     },
     {
       "name": "concerts",
-      "number": "12",
+      "number": "1",
       "text": "Концертов отыграл"
     },
     {
       "name": "cities",
-      "number": "34",
+      "number": "1",
       "text": "Максимальное число городов в туре"
     },
     {
       "name": "years",
-      "number": "5",
+      "number": "1",
       "text": "Лет на сцене в качестве скрипача"
     }
   ],
   "user": {
-    "email": "vetalgta@gmail.com",
+    "email": "test@gmail.com",
     "hash": "26f91caaceb4ffe88853f94528f1dd1803bdc882be095d0ded5efb074ee30711e3bbb73259ab443a5a2e5790b33b04f83b54f6addf89352f619992c5df39d779fb17041885f31620890d694b3df4b414b4f00e5e07b9cc03b7c0e04af4437e5774710f726fc72ac54761ce0816e09006d4f287d5883f7a8db31330dde365b0a2fda6a04db41dbe31e37080bfe603a62b4bd065a8966aa85ffc35b8de4d770bd30bca1ae7c6320c99a74f40d92002dd6c6a7e790dda10ba76b5372ca585c48124cadd53970e9ef0200e1dfe382ba06f81bad9126b8e68b80c0c3a401efe2ec9cdd28ce4e73714af2c79449800c5ebaa0b10bfdff54a0390db4bdeedbc1b19c9404a134507e4b10b9bcfa83e883e63a7092f3ff9762c1270c78778084e13ea7d520f3043ed949ec71cc93c85c64249654c042f05695957a0495b53d1776a4105b2c2b688c627dd2f15278a19badd191347c60cd56cb329cfd84a0e68e25fbae6c299ca5442864fcaa5cbd4ccfa8dc1c18bbe97bc76f1409ee06fb6ddb8e37481926ccfffd8769edc149ffce852ddcd16aa366dff0664aeda107cc3e39169b7592a3b815b2bfc1af1008d6eacd0341b3d763142c590768071358c5403075d000756e4e32e3ec47ee337c8ff556e8f367183b58c134acef7418f56602099f2315b2095dac6a6d59d6ae9cd45bc5442b80dff1b4d1bc25e124a61af23ca756a904cc0",
     "salt": "1e794a8e2557895ed0682a19059a7921"
   },
