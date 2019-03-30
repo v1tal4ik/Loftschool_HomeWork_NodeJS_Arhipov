@@ -9,5 +9,5 @@ deploy:
     secure: $he
   strategy: git
   app: archipov
-  on:
-    branch: 03    
+on:
+  branch: 03    
